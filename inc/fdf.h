@@ -6,7 +6,7 @@
 /*   By: gpinchuk <gpinchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 14:12:58 by gpinchuk          #+#    #+#             */
-/*   Updated: 2022/06/25 16:31:24 by gpinchuk         ###   ########.fr       */
+/*   Updated: 2022/07/19 19:22:36 by gpinchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_fdf
 	void *mxl;
 	void *mlx_win;
 	int **matrix;
+	int **color_matrix;
 	int width;
 	int height;
 
@@ -78,6 +79,7 @@ typedef struct s_fdf
 
 
 void	print_int2dstr(int **str, int height, int width);
+void	print_char2dstr(char ***str, int height, int width);
 
 int 	**get_map(char *name, fdf *data);
 int		error(char *msg);
@@ -103,4 +105,8 @@ void 	change_project(int key, fdf *data);
 int		mous_press(int button, int x, int y, fdf *data);
 int		mous_release(int button, int x, int y, fdf *data);
 int		mous_move(int x, int y, fdf *data);
+
+int 	colors(char *temp);
+int		**fill_matrix(int height, int width);
+char	***color_matrix(int height, int width);
 #endif

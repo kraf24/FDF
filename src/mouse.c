@@ -6,7 +6,7 @@
 /*   By: gpinchuk <gpinchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:27:29 by gpinchuk          #+#    #+#             */
-/*   Updated: 2022/06/25 15:37:32 by gpinchuk         ###   ########.fr       */
+/*   Updated: 2022/07/19 19:23:14 by gpinchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 int mous_press(int button, int x, int y, fdf *data)
 {
-	printf("%d, %d, %d, %d\n", button, x, y, data->height);
+	(void)x;
+	(void)y;
 	if (button == 4 || button == 5)
 		zoom_key(button, data);
 	else if(button == 1)
@@ -26,7 +27,9 @@ int mous_press(int button, int x, int y, fdf *data)
 
 int mous_release(int button, int x, int y, fdf *data)
 {
-	printf("%d, %d, %d, %d\n", button, x, y, data->height);
+	(void)x;
+	(void)y;
+	(void)button;
 	data->mouse->is_pressed = false;
 	return (0);
 }

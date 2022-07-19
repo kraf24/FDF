@@ -6,7 +6,7 @@
 /*   By: gpinchuk <gpinchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 18:53:56 by gpinchuk          #+#    #+#             */
-/*   Updated: 2022/06/25 16:38:55 by gpinchuk         ###   ########.fr       */
+/*   Updated: 2022/07/19 13:55:59 by gpinchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int key(int key, fdf *data)
 {
-	printf("%d \n", key);
+	//printf("%d \n", key);
 	if (key >= 123 && key <= 126)
 		move_key(key , data);
 	if (key == 30 || key == 44)

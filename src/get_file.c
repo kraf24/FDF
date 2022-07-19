@@ -6,7 +6,7 @@
 /*   By: gpinchuk <gpinchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 14:13:52 by gpinchuk          #+#    #+#             */
-/*   Updated: 2022/06/25 17:06:38 by gpinchuk         ###   ########.fr       */
+/*   Updated: 2022/07/19 20:24:34 by gpinchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,18 @@ int	get_height(char *name)
 	return (height);
 }
 
-int	wd_counter(char *str)
+int	wd_counter(char *str) //not working
 {
 	int	count;
-	int	ind;
-	int	i;
+	char **strd;
 
 	count = 0;
-	i = 0;
-	ind = 0;
-	while (str[i])
+	strd = ft_split(str, ' ');
+	while(strd[count])
 	{
-		if ((str[i] >= '0' && str[i] <= '9') && ind == 0)
-		{
-			count++;
-			ind = 1;
-		}
-		else
-			ind = 0;
-		i++;
+		if(ft_strncmp(strd[count], "\n", 5) == 0)
+		return (count - 1);
+		count++;
 	}
 	return (count);
 }
@@ -77,15 +70,16 @@ int	get_width(char *name)
 	return (width);
 }
 
-void	matrix(int *matrix_line, char *string)
+void matrix(int *matrix_line, int *cmatrix_line, char *string)
 {
 	char	**temp;
 	int		i;
-
+	
 	temp = ft_split(string, ' ');
 	i = 0;
 	while (temp[i])
 	{
+		cmatrix_line[i] = colors(temp[i]);
 		matrix_line[i] = ft_atoi(temp[i]);
 		free(temp[i]);
 		i++;
@@ -101,24 +95,22 @@ int	**get_map(char *name, fdf *data)
 
 	data->height = get_height(name);
 	data->width = get_width(name);
-	data->matrix = (int **)malloc(sizeof(int *) * (data->height + 1));
-	i = 0;
-	while (i < data->height)
-		data->matrix[i++] = (int *)malloc(sizeof(int) * (data->width + 1));
+	data->color_matrix = fill_matrix(data->height, data->width);
+	data->matrix = fill_matrix(data->height, data->width);
 	fd = open(name, O_RDONLY, 0);
-	// if (fd == -1)
-	// {
-		
-	// }
 	i = 0;
 	while (i < data->height)
 	{
 		string = get_next_line(fd);
-		matrix(data->matrix[i], string);
+		matrix(data->matrix[i],data->color_matrix[i], string);
 		free(string);
 		i++;
 	}
 	data->matrix[i] = NULL;
+	data->color_matrix[i] = NULL;
+	print_int2dstr(data->color_matrix, data->height ,data->width);
+	//print_int2dstr(data->matrix, data->height ,data->width);
 	close(fd);
+	
 	return (data->matrix);
 }

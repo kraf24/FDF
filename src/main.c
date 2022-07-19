@@ -6,7 +6,7 @@
 /*   By: gpinchuk <gpinchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 14:28:28 by gpinchuk          #+#    #+#             */
-/*   Updated: 2022/06/25 16:42:22 by gpinchuk         ###   ########.fr       */
+/*   Updated: 2022/07/17 14:35:42 by gpinchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char *argv[])
 	data = (fdf*)ft_calloc(1, (sizeof(fdf)));
 	data->mouse = (t_mouse*)ft_calloc(1, (sizeof(t_mouse)));
 	get_map(argv[1], data);
-	print_int2dstr(data->matrix, data->height, data->width);
+	//print_int2dstr(data->matrix, data->height, data->width);
 	standart(data);
 	init_win(data);
 	claculations(data);

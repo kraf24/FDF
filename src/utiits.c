@@ -6,7 +6,7 @@
 /*   By: gpinchuk <gpinchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 14:04:40 by gpinchuk          #+#    #+#             */
-/*   Updated: 2022/06/25 16:44:12 by gpinchuk         ###   ########.fr       */
+/*   Updated: 2022/07/17 17:57:12 by gpinchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,18 @@ void free_2dstring(fdf *data)
 		y++;
 	}
 	free(data->matrix);
+}
+
+int **fill_matrix(int height, int width)
+{
+	int i;
+	int **data;
+
+	i = 0;
+	data = (int **)ft_calloc(sizeof(int *), (height + 1));
+	while (i < height)
+	{
+		data[i++] = (int *)ft_calloc(sizeof(int), (width + 1));
+	}
+	return (data);
 }
