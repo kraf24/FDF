@@ -43,3 +43,5 @@ fclean: clean
 	@echo "$(YELLOW)Evrything was cleaned $(DEF_COLOR)"
 
 re: fclean all
+
+.PHONY: all clean fclean re

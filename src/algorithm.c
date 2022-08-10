@@ -6,7 +6,7 @@
 /*   By: gpinchuk <gpinchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 13:35:33 by gpinchuk          #+#    #+#             */
-/*   Updated: 2022/07/19 19:21:36 by gpinchuk         ###   ########.fr       */
+/*   Updated: 2022/07/20 19:34:47 by gpinchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	draw_map(fdf *data)
 		while (x < data->width)
 		{
 			if (x < data->width - 1)
-				isometric(x, y, x + 1, y, data);
+				isometric_x(x, y, data);
 			if (y < data->height - 1)
-				isometric(x, y, x, y + 1, data);
+				isometric_y(x, y, data);
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: gpinchuk <gpinchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/09 17:57:26 by gpinchuk          #+#    #+#             */
-/*   Updated: 2022/07/19 19:23:21 by gpinchuk         ###   ########.fr       */
+/*   Updated: 2022/07/20 19:44:35 by gpinchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <libft.h>
 #include "fdf.h"
 
-static void	rotate_y(int *x, int *z, double beta)
+void	rotate_y(int *x, int *z, double beta)
 {
 	int	previous_x;
 
@@ -23,7 +23,7 @@ static void	rotate_y(int *x, int *z, double beta)
 	*z = -previous_x * sin(beta) + *z * cos(beta);
 }
 
-static void	rotate_z(int *x, int *y, double gamma)
+void	rotate_z(int *x, int *y, double gamma)
 {
 	int	previous_x;
 	int	previous_y;
@@ -34,7 +34,7 @@ static void	rotate_z(int *x, int *y, double gamma)
 	*y = previous_x * sin(gamma) + previous_y * cos(gamma);
 }
 
-static void	rotate_x(int *y, int *z, double alpha)
+void	rotate_x(int *y, int *z, double alpha)
 {
 	int	previous_y;
 
@@ -49,18 +49,18 @@ void	xy_isometric(int *x, int *y, int z)
 	*y = (*x + *y) * sin(0.9) - z;
 }
 
-void	isometric(int x, int y, int x1, int y1, fdf *data)
+void	isometric_x(int x, int y, fdf *data)
 {
-	color(data, y, x, y1, x1);
-	fill(x, y, x1, y1, data);
-	
+	fill(x, y, data);
+	data->x1 = x + 1;
+	data->y1 = y;
+	color(data);
 	data->x *= data->zoom;
 	data->x1 *= data->zoom;
 	data->y *= data->zoom;
 	data->y1 *= data->zoom;
 	data->z *= data->zoom_height;
 	data->z1 *= data->zoom_height;
-	
 	rotate_x(&data->y, &data->z, data->x_angle);
 	rotate_x(&data->y1, &data->z1, data->x_angle);
 	rotate_y(&data->x, &data->z, data->y_angle);

@@ -6,7 +6,7 @@
 /*   By: gpinchuk <gpinchuk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 14:13:52 by gpinchuk          #+#    #+#             */
-/*   Updated: 2022/07/19 20:24:34 by gpinchuk         ###   ########.fr       */
+/*   Updated: 2022/07/20 17:31:43 by gpinchuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@
 
 int	get_height(char *name)
 {
-	int	height;
-	int	fd;
-	char *temp;
+	int		height;
+	int		fd;
+	char	*temp;
 
 	height = 0;
 	fd = open(name, O_RDONLY, 0);
+	if (fd == -1)
+		error("Error while trying to read file.");
 	temp = get_next_line(fd);
 	while (temp)
 	{
@@ -34,19 +36,25 @@ int	get_height(char *name)
 	return (height);
 }
 
-int	wd_counter(char *str) //not working
+int	wd_counter(char *str)
 {
-	int	count;
-	char **strd;
+	int		count;
+	char	**strd;
 
 	count = 0;
 	strd = ft_split(str, ' ');
-	while(strd[count])
+	while (strd[count])
 	{
-		if(ft_strncmp(strd[count], "\n", 5) == 0)
-		return (count - 1);
+		if (ft_strncmp(strd[count], "\n", 5) == 0)
+		{
+			free(strd[count]);
+			free(strd);
+			return (count);
+		}
+		free(strd[count]);
 		count++;
 	}
+	free(strd);
 	return (count);
 }
 
@@ -58,7 +66,11 @@ int	get_width(char *name)
 
 	width = 0;
 	fd = open(name, O_RDONLY, 0);
+	if (!fd)
+		error("Error: Empty file!");
 	str = get_next_line(fd);
+	if (!str)
+		error("Error: Empty file!");
 	width = wd_counter(str);
 	free(str);
 	while (str)
@@ -70,11 +82,11 @@ int	get_width(char *name)
 	return (width);
 }
 
-void matrix(int *matrix_line, int *cmatrix_line, char *string)
+void	matrix(int *matrix_line, int *cmatrix_line, char *string)
 {
 	char	**temp;
 	int		i;
-	
+
 	temp = ft_split(string, ' ');
 	i = 0;
 	while (temp[i])
@@ -102,15 +114,12 @@ int	**get_map(char *name, fdf *data)
 	while (i < data->height)
 	{
 		string = get_next_line(fd);
-		matrix(data->matrix[i],data->color_matrix[i], string);
+		matrix(data->matrix[i], data->color_matrix[i], string);
 		free(string);
 		i++;
 	}
 	data->matrix[i] = NULL;
 	data->color_matrix[i] = NULL;
-	print_int2dstr(data->color_matrix, data->height ,data->width);
-	//print_int2dstr(data->matrix, data->height ,data->width);
 	close(fd);
-	
 	return (data->matrix);
 }
