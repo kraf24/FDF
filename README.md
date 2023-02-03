@@ -2,7 +2,7 @@
 (Made only for macOS)
 
 This project is about representing a landscape as a 3D object
-in which all surfaces are outlined in lines.The program takes a map as parameter and creates its 3d representation.
+in which all surfaces are outlined in lines. The program takes a map as parameter and creates its 3d representation.
 
 ## Instalation
 
@@ -13,7 +13,7 @@ in which all surfaces are outlined in lines.The program takes a map as parameter
  + `make`
  + `./42.fdf test_maps/<map>`
 
-If you want you can crearte your own map. File shoild end with ".fdf"
+If you want you can create your map. The file should end with ".fdf"
 
 | keys | Type |
 |:------| :--------|
@@ -22,7 +22,7 @@ If you want you can crearte your own map. File shoild end with ".fdf"
 | ↑ | moves up |
 | ↓ | moves down |
 | h | make map higer |
-| l | amke map lower |
+| l | make map lower |
 | / | lower scale|
 | ] | increse scale |
 | mouse | move with a mouse |
